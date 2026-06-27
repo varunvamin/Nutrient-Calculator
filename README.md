@@ -1,5 +1,7 @@
 # Nutrient Calculator - Web App
 
+🚀 **Live App**: [https://nutrient-calculator.streamlit.app/](https://nutrient-calculator.streamlit.app/)
+
 A modern, interactive Python-based web application designed to calculate and track daily nutritional intake. Built with Streamlit for a seamless user experience.
 
 ## Features
