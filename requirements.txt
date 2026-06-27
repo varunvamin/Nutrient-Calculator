@@ -1,3 +1,1 @@
-# Nutrient Calculator dependencies
-# This project uses Python standard libraries (json, os, datetime).
-# No external dependencies required.
+streamlit==1.32.0
