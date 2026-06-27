@@ -5,6 +5,7 @@
 A modern, interactive Python-based web application designed to calculate and track daily nutritional intake. Built with Streamlit for a seamless user experience.
 
 ## Premium Features
+- **REST API Integration**: Connects to the OpenFoodFacts database via `requests` to automatically fetch and log real-time nutritional data for searched foods.
 - **Data Visualization**: Integrated Plotly to render interactive, real-time donut charts of daily macronutrient breakdowns.
 - **Premium UI/UX**: Designed with custom CSS for a modern dark-mode aesthetic, glassmorphism elements, and sleek typography.
 - **Goal Tracking**: Set and track daily macro goals (Calories, Protein, Carbs, Fat) with visual progress bars updating in real-time.

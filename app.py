@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.graph_objects as go
+import requests
 from nutrients import NutritionalAnalyzer
 import datetime
 
@@ -73,7 +74,7 @@ st.markdown("""
 analyzer = NutritionalAnalyzer()
 
 st.title("✨ Premium Nutrient Tracker")
-st.markdown("Monitor your daily macros with real-time analytics and beautiful visualizations.")
+st.markdown("Monitor your daily macros with real-time analytics and an integrated food database.")
 st.markdown("---")
 
 # Daily Goals Configuration
@@ -88,9 +89,40 @@ summary = analyzer.get_daily_summary()
 col1, col2 = st.columns([1.5, 1], gap="large")
 
 with col1:
-    st.subheader("🍽️ Add a New Meal")
+    st.subheader("🔍 Auto-Fetch from Database (OpenFoodFacts API)")
+    with st.form("api_search_form"):
+        search_query = st.text_input("Search Food (e.g., Apple, Chicken Breast, Oats)")
+        search_btn = st.form_submit_button("Fetch Macros 🌐")
+        
+    if search_btn and search_query.strip():
+        with st.spinner(f"Searching database for '{search_query}'..."):
+            try:
+                url = f"https://world.openfoodfacts.org/cgi/search.pl?search_terms={search_query}&search_simple=1&action=process&json=1&page_size=1"
+                response = requests.get(url, headers={'User-Agent': 'NutrientCalculator/1.0'})
+                data = response.json()
+                
+                if data.get('products'):
+                    product = data['products'][0]
+                    name = product.get('product_name', search_query.title())
+                    nutriments = product.get('nutriments', {})
+                    
+                    # OpenFoodFacts provides data per 100g
+                    cal = float(nutriments.get('energy-kcal_100g', 0))
+                    pro = float(nutriments.get('proteins_100g', 0))
+                    car = float(nutriments.get('carbohydrates_100g', 0))
+                    fat = float(nutriments.get('fat_100g', 0))
+                    
+                    analyzer.add_meal(f"{name} (100g)", cal, pro, car, fat)
+                    st.success(f"Successfully fetched and logged: {name} (100g)")
+                    st.rerun()
+                else:
+                    st.warning(f"Could not find '{search_query}' in the database. Try manual entry.")
+            except Exception as e:
+                st.error("Error connecting to the food database.")
+
+    st.subheader("🍽️ Manual Entry")
     with st.form("add_meal_form", clear_on_submit=True):
-        food_name = st.text_input("Food Name", placeholder="e.g., Grilled Salmon & Quinoa")
+        food_name = st.text_input("Custom Food Name")
         
         c1, c2, c3, c4 = st.columns(4)
         with c1: calories = st.number_input("Calories", min_value=0.0, step=10.0)
@@ -98,7 +130,7 @@ with col1:
         with c3: carbs = st.number_input("Carbs (g)", min_value=0.0, step=1.0)
         with c4: fat = st.number_input("Fat (g)", min_value=0.0, step=1.0)
             
-        submit_button = st.form_submit_button(label="Log Meal 🚀")
+        submit_button = st.form_submit_button(label="Log Custom Meal ➕")
 
     if submit_button:
         if food_name.strip():
