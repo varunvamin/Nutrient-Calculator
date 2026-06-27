@@ -4,11 +4,11 @@
 
 A modern, interactive Python-based web application designed to calculate and track daily nutritional intake. Built with Streamlit for a seamless user experience.
 
-## Features
-- **Interactive Web Interface**: A clean UI to input meals and track daily nutrition.
-- **Nutritional Analysis**: Processes and tracks calories, protein, carbs, and fats.
-- **Real-Time Dashboard**: View a live daily summary of total nutritional intake dynamically on the sidebar.
-- **Data Persistence**: Saves meal data locally, organizing it seamlessly by date.
+## Premium Features
+- **Data Visualization**: Integrated Plotly to render interactive, real-time donut charts of daily macronutrient breakdowns.
+- **Premium UI/UX**: Designed with custom CSS for a modern dark-mode aesthetic, glassmorphism elements, and sleek typography.
+- **Goal Tracking**: Set and track daily macro goals (Calories, Protein, Carbs, Fat) with visual progress bars updating in real-time.
+- **Data Persistence**: Saves meal data locally in JSON, organizing it seamlessly by date.
 
 ## Local Setup
 1. Clone the repository:
