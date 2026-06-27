@@ -1,0 +1,3 @@
+# Nutrient Calculator dependencies
+# This project uses Python standard libraries (json, os, datetime).
+# No external dependencies required.
