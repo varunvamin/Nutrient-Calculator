@@ -4,94 +4,77 @@ import requests
 from nutrients import NutritionalAnalyzer
 import datetime
 
-st.set_page_config(page_title="Health Buddy", page_icon="☁️", layout="wide")
+st.set_page_config(page_title="Premium Nutrient Tracker", page_icon="🍎", layout="wide")
 
-# Custom CSS for Soft Pastel UI (matching reference image)
+# Custom CSS for Premium UI
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
     
     html, body, [class*="css"] {
-        font-family: 'Nunito', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
     
-    /* Main Background - Soft Pastel Gradient */
+    /* Main Background */
     .stApp {
-        background: linear-gradient(135deg, #fff1f2 0%, #fdf4ff 50%, #f0fdf4 100%);
-        color: #1f2937;
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        color: white;
     }
     
     /* Sidebar Glassmorphism */
     [data-testid="stSidebar"] {
-        background-color: rgba(255, 255, 255, 0.4) !important;
-        backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(255,255,255,0.5);
+        background-color: rgba(15, 23, 42, 0.7) !important;
+        backdrop-filter: blur(15px);
+        border-right: 1px solid rgba(255,255,255,0.05);
     }
     
-    /* Headers & Text */
-    h1, h2, h3, h4, h5, h6, p, label {
-        color: #374151 !important;
-        font-weight: 700;
+    /* Headers */
+    h1, h2, h3, h4, h5, h6 {
+        color: #f8fafc !important;
+        font-weight: 600;
     }
     
     /* Input fields */
     .stTextInput>div>div>input, .stNumberInput>div>div>input {
-        background-color: #ffffff;
-        color: #1f2937;
-        border: 1px solid #fce7f3;
-        border-radius: 16px;
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        background-color: rgba(255,255,255,0.05);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
     }
     
-    /* Pill-shaped Gradient Button */
+    /* Gradient Button */
     .stButton>button {
-        background: linear-gradient(90deg, #ffcba4 0%, #ffb38a 100%);
-        color: #431407 !important;
+        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+        color: white;
         border: none;
-        border-radius: 30px;
-        padding: 12px 24px;
-        font-weight: 800;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: 600;
         transition: all 0.3s ease;
         width: 100%;
-        box-shadow: 0 8px 20px rgba(255, 179, 138, 0.4);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
     
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 25px rgba(255, 179, 138, 0.6);
-        color: #431407 !important;
+        box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
         border: none;
+        color: white;
     }
     
     /* Expander cards */
     .streamlit-expanderHeader {
-        background-color: #ffffff;
-        border-radius: 16px;
-        border: none;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    }
-    div[data-testid="stExpanderDetails"] {
-        background-color: #ffffff;
-        border-radius: 0 0 16px 16px;
-        border: none;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    }
-    
-    /* Form container */
-    [data-testid="stForm"] {
-        background-color: rgba(255,255,255,0.6);
-        border: 1px solid rgba(255,255,255,0.8);
-        border-radius: 20px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-        padding: 20px;
+        background-color: rgba(255,255,255,0.05);
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.05);
     }
 </style>
 """, unsafe_allow_html=True)
 
 analyzer = NutritionalAnalyzer()
 
-st.title("☁️ Your happy health buddy")
-st.markdown("Track habits, stay active, and celebrate small wins — with a little smile along the way.")
+st.title("✨ Premium Nutrient Tracker")
+st.markdown("Monitor your daily macros with real-time analytics and an integrated food database.")
 st.markdown("---")
 
 # Daily Goals Configuration
@@ -106,10 +89,10 @@ summary = analyzer.get_daily_summary()
 col1, col2 = st.columns([1.5, 1], gap="large")
 
 with col1:
-    st.subheader("🔍 Food Buddy Search")
+    st.subheader("🔍 Auto-Fetch from Database (OpenFoodFacts API)")
     with st.form("api_search_form"):
-        search_query = st.text_input("Ask anything... (e.g., Apple, Chicken Breast)")
-        search_btn = st.form_submit_button("Fetch Macros ✨")
+        search_query = st.text_input("Search Food (e.g., Apple, Chicken Breast, Oats)")
+        search_btn = st.form_submit_button("Fetch Macros 🌐")
         
     if search_btn and search_query.strip():
         with st.spinner(f"Searching database for '{search_query}'..."):
@@ -123,16 +106,17 @@ with col1:
                     name = product.get('product_name', search_query.title())
                     nutriments = product.get('nutriments', {})
                     
+                    # OpenFoodFacts provides data per 100g
                     cal = float(nutriments.get('energy-kcal_100g', 0))
                     pro = float(nutriments.get('proteins_100g', 0))
                     car = float(nutriments.get('carbohydrates_100g', 0))
                     fat = float(nutriments.get('fat_100g', 0))
                     
                     analyzer.add_meal(f"{name} (100g)", cal, pro, car, fat)
-                    st.success(f"Successfully logged: {name} (100g)")
+                    st.success(f"Successfully fetched and logged: {name} (100g)")
                     st.rerun()
                 else:
-                    st.warning(f"Could not find '{search_query}'. Try manual entry.")
+                    st.warning(f"Could not find '{search_query}' in the database. Try manual entry.")
             except Exception as e:
                 st.error("Error connecting to the food database.")
 
@@ -159,6 +143,7 @@ with col1:
     st.subheader("📅 Today's Log")
     today_str = str(datetime.date.today())
     if today_str in analyzer.data and analyzer.data[today_str]:
+        # Show most recent meals first
         for meal in reversed(analyzer.data[today_str]):
             with st.expander(f"**{meal['food']}** — {meal['calories']} kcal"):
                 st.write(f"🥩 **Protein**: {meal['protein']}g | 🍚 **Carbs**: {meal['carbs']}g | 🥑 **Fat**: {meal['fat']}g")
@@ -166,7 +151,7 @@ with col1:
         st.info("No meals logged today. Time to eat!")
 
 with col2:
-    st.subheader("📊 Your Nutrition Analysis")
+    st.subheader("📊 Macro Breakdown")
     
     labels = ['Protein', 'Carbs', 'Fat']
     values = [summary['protein'], summary['carbs'], summary['fat']]
@@ -176,8 +161,7 @@ with col2:
             labels=labels, 
             values=values, 
             hole=.6, 
-            # Pastel colors matching the image vibe: Light Blue, Light Orange, Light Pink
-            marker_colors=['#93c5fd', '#fdba74', '#f9a8d4'],
+            marker_colors=['#ef4444', '#3b82f6', '#eab308'],
             textinfo='label+percent',
             hoverinfo='label+value+percent'
         )])
@@ -185,7 +169,7 @@ with col2:
             margin=dict(t=20, b=20, l=20, r=20),
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#374151', family='Nunito'),
+            font=dict(color='white'),
             showlegend=False,
             height=300
         )
@@ -194,8 +178,7 @@ with col2:
         st.write("Log a meal to see your macro breakdown!")
 
 # Sidebar for Goals & Progress
-st.sidebar.title("COUNT YOUR DAILY CALORIES")
-st.sidebar.markdown("<br>", unsafe_allow_html=True)
+st.sidebar.header("🎯 Daily Goals")
 
 def draw_progress(label, current, goal):
     st.sidebar.write(f"**{label}**: {current:.0f} / {goal}")
@@ -211,4 +194,4 @@ st.sidebar.markdown("<br>", unsafe_allow_html=True)
 draw_progress("🥑 Fat (g)", summary['fat'], GOAL_FAT)
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Track Trends. Spot Patterns. Crush Your Goals.")
+st.sidebar.caption("Data is saved locally in `nutrition_data.json`.")
