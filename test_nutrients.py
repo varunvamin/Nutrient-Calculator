@@ -14,3 +14,9 @@ def analyzer():
 def test_initialization(analyzer):
     assert analyzer.data == {}
     assert analyzer.goals['calories'] == 2000
+
+def test_add_meal(analyzer):
+    analyzer.add_meal("Test Apple", 95, 0.5, 25, 0.3)
+    summary = analyzer.get_daily_summary()
+    assert summary['calories'] == 95
+    assert summary['protein'] == 0.5
