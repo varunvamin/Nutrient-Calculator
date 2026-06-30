@@ -18,3 +18,14 @@ class NutritionalAnalyzer:
             except json.JSONDecodeError:
                 return {}
         return {}
+
+    def _load_goals(self) -> Dict[str, float]:
+        if os.path.exists(self.data_file):
+            try:
+                with open(self.data_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    if isinstance(data, dict) and 'goals' in data:
+                        return data['goals']
+            except json.JSONDecodeError:
+                pass
+        return {'calories': 2000, 'protein': 150, 'carbs': 200, 'fat': 70}
