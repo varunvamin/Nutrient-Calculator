@@ -46,3 +46,28 @@ with st.sidebar.expander("⚙️ Settings (Set Goals)"):
             analyzer.update_goals(new_cal, new_pro, new_car, new_fat)
             st.success("Goals updated!")
             st.rerun()
+
+tabs = st.tabs(["🍽️ Log Meals", "📈 Trends & History"])
+
+with tabs[0]:
+    col1, col2 = st.columns([1.5, 1], gap="large")
+    
+    with col1:
+        st.subheader("🔍 Food Buddy Search")
+        with st.form("api_search_form"):
+            search_query = st.text_input("Ask anything... (e.g., Apple)")
+            if st.form_submit_button("Fetch Macros ✨") and search_query.strip():
+                try:
+                    url = f"https://world.openfoodfacts.org/cgi/search.pl?search_terms={search_query}&search_simple=1&action=process&json=1&page_size=1"
+                    data = requests.get(url, headers={'User-Agent': 'NutrientCalculator/1.0'}).json()
+                    if data.get('products'):
+                        p = data['products'][0]
+                        n = p.get('nutriments', {})
+                        analyzer.add_meal(f"{p.get('product_name', search_query)} (100g)", 
+                                          float(n.get('energy-kcal_100g', 0)), float(n.get('proteins_100g', 0)), 
+                                          float(n.get('carbohydrates_100g', 0)), float(n.get('fat_100g', 0)))
+                        st.rerun()
+                    else:
+                        st.warning("Not found.")
+                except Exception:
+                    st.error("API Error.")
