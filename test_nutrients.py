@@ -10,3 +10,7 @@ def analyzer():
     yield NutritionalAnalyzer(test_file)
     if os.path.exists(test_file):
         os.remove(test_file)
+
+def test_initialization(analyzer):
+    assert analyzer.data == {}
+    assert analyzer.goals['calories'] == 2000
