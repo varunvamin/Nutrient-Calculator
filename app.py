@@ -83,3 +83,25 @@ with tabs[0]:
             if st.form_submit_button("Log Custom Meal ➕") and food_name.strip():
                 analyzer.add_meal(food_name, cal, pro, car, fat)
                 st.rerun()
+
+    with col2:
+        st.subheader("📊 Today's Macros")
+        values = [summary['protein'], summary['carbs'], summary['fat']]
+        if sum(values) > 0:
+            fig = go.Figure(data=[go.Pie(labels=['Protein', 'Carbs', 'Fat'], values=values, hole=.6, 
+                                         marker_colors=['#93c5fd', '#fdba74', '#f9a8d4'])])
+            fig.update_layout(margin=dict(t=0, b=0, l=0, r=0), paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+            st.plotly_chart(fig, use_container_width=True)
+            
+        st.subheader("📅 Today's Log")
+        today_str = str(datetime.date.today())
+        if today_str in analyzer.data and analyzer.data[today_str]:
+            for i, meal in enumerate(analyzer.data[today_str]):
+                col_name, col_del = st.columns([4, 1])
+                with col_name:
+                    with st.expander(f"{meal['food']} - {meal['calories']} kcal"):
+                        st.write(f"Pro: {meal['protein']}g | Car: {meal['carbs']}g | Fat: {meal['fat']}g")
+                with col_del:
+                    if st.button("❌", key=f"del_{i}"):
+                        analyzer.delete_meal(today_str, i)
+                        st.rerun()
