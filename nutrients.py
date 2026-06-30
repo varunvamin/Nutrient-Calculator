@@ -60,3 +60,18 @@ class NutritionalAnalyzer:
             self._save_data()
             return True
         return False
+
+    def get_daily_summary(self, date_str: Optional[str] = None) -> Dict[str, float]:
+        if date_str is None:
+            date_str = str(date.today())
+            
+        summary = {'calories': 0.0, 'protein': 0.0, 'carbs': 0.0, 'fat': 0.0}
+        
+        if date_str in self.data:
+            for meal in self.data[date_str]:
+                summary['calories'] += meal.get('calories', 0)
+                summary['protein'] += meal.get('protein', 0)
+                summary['carbs'] += meal.get('carbs', 0)
+                summary['fat'] += meal.get('fat', 0)
+                
+        return summary
