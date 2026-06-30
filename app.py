@@ -105,3 +105,14 @@ with tabs[0]:
                     if st.button("❌", key=f"del_{i}"):
                         analyzer.delete_meal(today_str, i)
                         st.rerun()
+
+with tabs[1]:
+    st.subheader("📈 7-Day Trend Analysis")
+    history = analyzer.get_weekly_history()
+    dates = list(history.keys())
+    cals = [d['calories'] for d in history.values()]
+    
+    fig_bar = px.bar(x=dates, y=cals, labels={'x':'Date', 'y':'Calories'}, title="Calorie Intake (Last 7 Days)")
+    fig_bar.update_traces(marker_color='#fdba74')
+    fig_bar.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+    st.plotly_chart(fig_bar, use_container_width=True)
