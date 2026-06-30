@@ -6,3 +6,4 @@ h1, h2, h3, h4, h5, h6, p, label { color: #374151 !important; font-weight: 700; 
 .stTextInput>div>div>input, .stNumberInput>div>div>input { background-color: #ffffff; color: #1f2937; border: 1px solid #fce7f3; border-radius: 16px; }
 .stButton>button { background: linear-gradient(90deg, #ffcba4 0%, #ffb38a 100%); color: #431407 !important; border: none; border-radius: 30px; padding: 12px 24px; font-weight: 800; width: 100%; }
 .stButton>button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(255, 179, 138, 0.6); }
+.streamlit-expanderHeader { background-color: #ffffff; border-radius: 16px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
