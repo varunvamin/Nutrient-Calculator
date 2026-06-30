@@ -53,3 +53,10 @@ class NutritionalAnalyzer:
         }
         self.data[today].append(meal)
         self._save_data()
+
+    def delete_meal(self, date_str: str, index: int) -> bool:
+        if date_str in self.data and 0 <= index < len(self.data[date_str]):
+            self.data[date_str].pop(index)
+            self._save_data()
+            return True
+        return False
