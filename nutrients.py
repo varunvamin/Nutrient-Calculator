@@ -29,3 +29,8 @@ class NutritionalAnalyzer:
             except json.JSONDecodeError:
                 pass
         return {'calories': 2000, 'protein': 150, 'carbs': 200, 'fat': 70}
+
+    def _save_data(self) -> None:
+        save_payload = {'meals': self.data, 'goals': self.goals}
+        with open(self.data_file, 'w', encoding='utf-8') as f:
+            json.dump(save_payload, f, indent=4)
