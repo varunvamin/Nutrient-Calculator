@@ -35,3 +35,14 @@ draw_progress("🔥 Calories (kcal)", summary['calories'], analyzer.goals['calor
 draw_progress("🥩 Protein (g)", summary['protein'], analyzer.goals['protein'])
 draw_progress("🍚 Carbs (g)", summary['carbs'], analyzer.goals['carbs'])
 draw_progress("🥑 Fat (g)", summary['fat'], analyzer.goals['fat'])
+
+with st.sidebar.expander("⚙️ Settings (Set Goals)"):
+    with st.form("goals_form"):
+        new_cal = st.number_input("Calories", value=int(analyzer.goals['calories']))
+        new_pro = st.number_input("Protein", value=int(analyzer.goals['protein']))
+        new_car = st.number_input("Carbs", value=int(analyzer.goals['carbs']))
+        new_fat = st.number_input("Fat", value=int(analyzer.goals['fat']))
+        if st.form_submit_button("Save Goals"):
+            analyzer.update_goals(new_cal, new_pro, new_car, new_fat)
+            st.success("Goals updated!")
+            st.rerun()
