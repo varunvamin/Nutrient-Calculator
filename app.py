@@ -16,3 +16,9 @@ def load_css():
 
 load_css()
 analyzer = NutritionalAnalyzer()
+
+st.title("☁️ Your happy health buddy")
+st.markdown("Track habits, stay active, and celebrate small wins — with a little smile along the way.")
+st.markdown("---")
+
+summary = analyzer.get_daily_summary()
