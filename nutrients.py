@@ -34,3 +34,7 @@ class NutritionalAnalyzer:
         save_payload = {'meals': self.data, 'goals': self.goals}
         with open(self.data_file, 'w', encoding='utf-8') as f:
             json.dump(save_payload, f, indent=4)
+
+    def update_goals(self, calories: float, protein: float, carbs: float, fat: float) -> None:
+        self.goals = {'calories': calories, 'protein': protein, 'carbs': carbs, 'fat': fat}
+        self._save_data()
