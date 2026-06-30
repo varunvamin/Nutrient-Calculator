@@ -20,3 +20,8 @@ def test_add_meal(analyzer):
     summary = analyzer.get_daily_summary()
     assert summary['calories'] == 95
     assert summary['protein'] == 0.5
+
+def test_update_goals(analyzer):
+    analyzer.update_goals(2500, 180, 250, 80)
+    assert analyzer.goals['calories'] == 2500
+    assert analyzer.goals['protein'] == 180
