@@ -71,3 +71,15 @@ with tabs[0]:
                         st.warning("Not found.")
                 except Exception:
                     st.error("API Error.")
+
+        st.subheader("🍽️ Manual Entry")
+        with st.form("manual_entry"):
+            food_name = st.text_input("Food Name")
+            c1, c2, c3, c4 = st.columns(4)
+            with c1: cal = st.number_input("Kcal", min_value=0.0)
+            with c2: pro = st.number_input("Pro(g)", min_value=0.0)
+            with c3: car = st.number_input("Car(g)", min_value=0.0)
+            with c4: fat = st.number_input("Fat(g)", min_value=0.0)
+            if st.form_submit_button("Log Custom Meal ➕") and food_name.strip():
+                analyzer.add_meal(food_name, cal, pro, car, fat)
+                st.rerun()
