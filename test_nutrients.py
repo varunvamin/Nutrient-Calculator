@@ -25,3 +25,13 @@ def test_update_goals(analyzer):
     analyzer.update_goals(2500, 180, 250, 80)
     assert analyzer.goals['calories'] == 2500
     assert analyzer.goals['protein'] == 180
+
+def test_delete_meal(analyzer):
+    analyzer.add_meal("Test Apple", 95, 0, 0, 0)
+    from datetime import date
+    today = str(date.today())
+    assert len(analyzer.data[today]) == 1
+    
+    success = analyzer.delete_meal(today, 0)
+    assert success is True
+    assert len(analyzer.data[today]) == 0
