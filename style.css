@@ -1,11 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Nunito', sans-serif; }
-.stApp { background: linear-gradient(135deg, #fff1f2 0%, #fdf4ff 50%, #f0fdf4 100%); color: #1f2937; }
-[data-testid="stSidebar"] { background-color: rgba(255, 255, 255, 0.4) !important; backdrop-filter: blur(20px); border-right: 1px solid rgba(255,255,255,0.5); }
-h1, h2, h3, h4, h5, h6, p, label { color: #374151 !important; font-weight: 700; }
-.stTextInput>div>div>input, .stNumberInput>div>div>input { background-color: #ffffff; color: #1f2937; border: 1px solid #fce7f3; border-radius: 16px; }
-.stButton>button { background: linear-gradient(90deg, #ffcba4 0%, #ffb38a 100%); color: #431407 !important; border: none; border-radius: 30px; padding: 12px 24px; font-weight: 800; width: 100%; }
-.stButton>button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(255, 179, 138, 0.6); }
-.streamlit-expanderHeader { background-color: #ffffff; border-radius: 16px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-div[data-testid="stExpanderDetails"] { background-color: #ffffff; border-radius: 0 0 16px 16px; border: none; }
-[data-testid="stForm"] { background-color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.8); border-radius: 20px; padding: 20px; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"] { 
+    font-family: 'Inter', sans-serif; 
+}
+
+/* Main App Background (Light Gray/Off-White) */
+.stApp { 
+    background-color: #e5e5e5; 
+    color: #1a1a1a; 
+}
+
+/* Typography Colors */
+h1, h2, h3, h4, h5, h6, p, label { 
+    color: #1a1a1a !important; 
+    font-weight: 600; 
+}
+
+/* Sidebar styling (Dark floating panel look) */
+[data-testid="stSidebar"] { 
+    background: linear-gradient(180deg, #4a4a4a 0%, #1e1e1e 100%) !important; 
+    border-right: none; 
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+}
+
+/* Force all text in sidebar to be white/light gray */
+[data-testid="stSidebar"] h1, 
+[data-testid="stSidebar"] h2, 
+[data-testid="stSidebar"] h3, 
+[data-testid="stSidebar"] p, 
+[data-testid="stSidebar"] label, 
+[data-testid="stSidebar"] div {
+    color: #f0f0f0 !important;
+}
+
+/* Sidebar Progress Bars (Coral Accent) */
+[data-testid="stSidebar"] .stProgress > div > div > div > div {
+    background-color: #ff6b4a !important; 
+}
+
+/* Inputs (Search, number inputs) - Neumorphic pill shape */
+.stTextInput>div>div>input, .stNumberInput>div>div>input { 
+    background-color: #f5f5f5; 
+    color: #1a1a1a; 
+    border: none; 
+    border-radius: 30px;
+    padding: 10px 15px;
+    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -3px -3px 6px rgba(255,255,255,0.5);
+}
+
+/* Buttons (Coral/Orange accent matching image) */
+.stButton>button { 
+    background-color: #ff6b4a; 
+    color: #ffffff !important; 
+    border: none; 
+    border-radius: 30px; 
+    padding: 12px 24px; 
+    font-weight: 600; 
+    width: 100%; 
+    box-shadow: 0 4px 12px rgba(255, 107, 74, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.stButton>button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(255, 107, 74, 0.5); 
+    color: #ffffff !important;
+    border: none;
+}
+
+/* Delete Button Specific - Make it a bit more subtle */
+button[key^="del_"] {
+    background-color: #f5f5f5;
+    color: #ff6b4a !important;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Expanders and Forms (White rounded cards) */
+.streamlit-expanderHeader { 
+    background-color: #ffffff; 
+    border-radius: 20px; 
+    border: none; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+div[data-testid="stExpanderDetails"] { 
+    background-color: #ffffff; 
+    border-radius: 0 0 20px 20px; 
+    border: none; 
+}
+
+[data-testid="stForm"] { 
+    background-color: #ffffff; 
+    border: none; 
+    border-radius: 24px; 
+    padding: 24px; 
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.03);
+}
+
+/* Tabs styling */
+[data-baseweb="tab-list"] {
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 5px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.03);
+}
+
+[data-baseweb="tab"] {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
