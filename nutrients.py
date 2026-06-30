@@ -38,3 +38,18 @@ class NutritionalAnalyzer:
     def update_goals(self, calories: float, protein: float, carbs: float, fat: float) -> None:
         self.goals = {'calories': calories, 'protein': protein, 'carbs': carbs, 'fat': fat}
         self._save_data()
+
+    def add_meal(self, food_name: str, calories: float, protein: float, carbs: float, fat: float) -> None:
+        today = str(date.today())
+        if today not in self.data:
+            self.data[today] = []
+            
+        meal = {
+            'food': food_name,
+            'calories': calories,
+            'protein': protein,
+            'carbs': carbs,
+            'fat': fat
+        }
+        self.data[today].append(meal)
+        self._save_data()
