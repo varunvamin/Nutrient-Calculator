@@ -35,3 +35,7 @@ def test_delete_meal(analyzer):
     success = analyzer.delete_meal(today, 0)
     assert success is True
     assert len(analyzer.data[today]) == 0
+
+def test_weekly_history(analyzer):
+    history = analyzer.get_weekly_history()
+    assert len(history) == 7
