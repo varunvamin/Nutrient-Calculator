@@ -39,4 +39,4 @@ def test_delete_meal(analyzer):
 def test_weekly_history(analyzer):
     history = analyzer.get_weekly_history()
     assert len(history) == 7
-\n# Minor test formatting tweak 0\n\n# Minor test formatting tweak 1\n\n# Minor test formatting tweak 2\n\n# Minor test formatting tweak 3\n\n# Minor test formatting tweak 4\n
+\n# Minor test formatting tweak 0\n\n# Minor test formatting tweak 1\n\n# Minor test formatting tweak 2\n\n# Minor test formatting tweak 3\n\n# Minor test formatting tweak 4\n\n# Minor test formatting tweak 5\n
