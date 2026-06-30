@@ -75,3 +75,12 @@ class NutritionalAnalyzer:
                 summary['fat'] += meal.get('fat', 0)
                 
         return summary
+
+    def get_weekly_history(self) -> Dict[str, Dict[str, float]]:
+        import datetime
+        history = {}
+        today = datetime.date.today()
+        for i in range(6, -1, -1):
+            d = today - datetime.timedelta(days=i)
+            history[str(d)] = self.get_daily_summary(str(d))
+        return history
