@@ -96,7 +96,7 @@ with tabs[0]:
                 plot_bgcolor='rgba(0,0,0,0)',
                 font=dict(color='#1a1a1a', family='Inter')
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, theme=None)
             
         st.subheader("📅 Today's Log")
         today_str = str(datetime.date.today())
@@ -126,4 +126,4 @@ with tabs[1]:
         xaxis=dict(showgrid=False, color='#1a1a1a'),
         yaxis=dict(showgrid=True, gridcolor='#e0e0e0', color='#1a1a1a')
     )
-    st.plotly_chart(fig_bar, use_container_width=True)
+    st.plotly_chart(fig_bar, use_container_width=True, theme=None)

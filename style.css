@@ -43,6 +43,7 @@ h1, h2, h3, h4, h5, h6, p, label {
 .stTextInput>div>div>input, .stNumberInput>div>div>input { 
     background-color: #f5f5f5 !important; 
     color: #1a1a1a !important; 
+    -webkit-text-fill-color: #1a1a1a !important;
     border: none !important; 
     border-radius: 30px !important;
     box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -3px -3px 6px rgba(255,255,255,0.5) !important;
