@@ -48,6 +48,23 @@ h1, h2, h3, h4, h5, h6, p, label {
     box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -3px -3px 6px rgba(255,255,255,0.5) !important;
 }
 
+[data-testid="stNumberInputStepDown"], 
+[data-testid="stNumberInputStepUp"] {
+    background-color: #f5f5f5 !important;
+    color: #1a1a1a !important;
+    border: none !important;
+}
+
+[data-testid="stNumberInputStepDown"] svg, 
+[data-testid="stNumberInputStepUp"] svg {
+    fill: #1a1a1a !important;
+}
+
+::placeholder {
+    color: #888888 !important;
+    opacity: 1;
+}
+
 [data-baseweb="input"] {
     padding: 2px 10px;
 }
