@@ -90,7 +90,12 @@ with tabs[0]:
         if sum(values) > 0:
             fig = go.Figure(data=[go.Pie(labels=['Protein', 'Carbs', 'Fat'], values=values, hole=.6, 
                                          marker_colors=['#93c5fd', '#fdba74', '#f9a8d4'])])
-            fig.update_layout(margin=dict(t=0, b=0, l=0, r=0), paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+            fig.update_layout(
+                margin=dict(t=0, b=0, l=0, r=0), 
+                paper_bgcolor='rgba(0,0,0,0)', 
+                plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#1a1a1a', family='Inter')
+            )
             st.plotly_chart(fig, use_container_width=True)
             
         st.subheader("📅 Today's Log")
@@ -114,5 +119,11 @@ with tabs[1]:
     
     fig_bar = px.bar(x=dates, y=cals, labels={'x':'Date', 'y':'Calories'}, title="Calorie Intake (Last 7 Days)")
     fig_bar.update_traces(marker_color='#fdba74')
-    fig_bar.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+    fig_bar.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)', 
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='#1a1a1a', family='Inter'),
+        xaxis=dict(showgrid=False, color='#1a1a1a'),
+        yaxis=dict(showgrid=True, gridcolor='#e0e0e0', color='#1a1a1a')
+    )
     st.plotly_chart(fig_bar, use_container_width=True)

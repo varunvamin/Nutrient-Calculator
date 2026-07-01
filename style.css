@@ -39,29 +39,36 @@ h1, h2, h3, h4, h5, h6, p, label {
 }
 
 /* Inputs (Search, number inputs) - Neumorphic pill shape */
+[data-baseweb="input"], [data-baseweb="base-input"],
 .stTextInput>div>div>input, .stNumberInput>div>div>input { 
-    background-color: #f5f5f5; 
-    color: #1a1a1a; 
-    border: none; 
-    border-radius: 30px;
-    padding: 10px 15px;
-    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -3px -3px 6px rgba(255,255,255,0.5);
+    background-color: #f5f5f5 !important; 
+    color: #1a1a1a !important; 
+    border: none !important; 
+    border-radius: 30px !important;
+    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -3px -3px 6px rgba(255,255,255,0.5) !important;
+}
+
+[data-baseweb="input"] {
+    padding: 2px 10px;
 }
 
 /* Buttons (Coral/Orange accent matching image) */
-.stButton>button { 
+.stButton > button, 
+[data-testid="stFormSubmitButton"] > button,
+[data-testid="baseButton-secondary"] { 
     background-color: #ff6b4a !important; 
     color: #ffffff !important; 
-    border: none; 
-    border-radius: 30px; 
-    padding: 12px 24px; 
-    font-weight: 600; 
-    width: 100%; 
-    box-shadow: 0 4px 12px rgba(255, 107, 74, 0.3);
-    transition: all 0.2s ease-in-out;
+    border: none !important; 
+    border-radius: 30px !important; 
+    padding: 12px 24px !important; 
+    font-weight: 600 !important; 
+    width: 100% !important; 
+    box-shadow: 0 4px 12px rgba(255, 107, 74, 0.3) !important;
+    transition: all 0.2s ease-in-out !important;
 }
 
-.stButton>button p, .stButton>button div, .stButton>button span {
+.stButton > button p, .stButton > button div, .stButton > button span,
+[data-testid="stFormSubmitButton"] > button p, [data-testid="stFormSubmitButton"] > button div, [data-testid="stFormSubmitButton"] > button span {
     color: #ffffff !important;
 }
 
