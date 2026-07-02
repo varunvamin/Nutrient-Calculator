@@ -21,6 +21,7 @@ class NutritionalAnalyzer:
         return {}
 
     def _load_goals(self) -> Dict[str, float]:
+        """Loads daily nutritional goals from the JSON data file or sets defaults."""
         if os.path.exists(self.data_file):
             try:
                 with open(self.data_file, 'r', encoding='utf-8') as f:
