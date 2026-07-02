@@ -44,6 +44,7 @@ class NutritionalAnalyzer:
         self._save_data()
 
     def add_meal(self, food_name: str, calories: float, protein: float, carbs: float, fat: float) -> None:
+        """Logs a new meal with its nutritional breakdown for the current day."""
         today = str(date.today())
         if today not in self.data:
             self.data[today] = []
