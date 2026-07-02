@@ -39,6 +39,7 @@ class NutritionalAnalyzer:
             json.dump(save_payload, f, indent=4)
 
     def update_goals(self, calories: float, protein: float, carbs: float, fat: float) -> None:
+        """Updates the daily nutritional goals and saves them."""
         self.goals = {'calories': calories, 'protein': protein, 'carbs': carbs, 'fat': fat}
         self._save_data()
 
