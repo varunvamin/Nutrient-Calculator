@@ -68,6 +68,7 @@ class NutritionalAnalyzer:
         return False
 
     def get_daily_summary(self, date_str: Optional[str] = None) -> Dict[str, float]:
+        """Calculates total calories and macros for a specific date (defaults to today)."""
         if date_str is None:
             date_str = str(date.today())
             
