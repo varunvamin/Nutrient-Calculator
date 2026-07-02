@@ -10,6 +10,7 @@ class NutritionalAnalyzer:
         self.goals = self._load_goals()
 
     def _load_data(self) -> Dict[str, List[Dict[str, Any]]]:
+        """Loads meal history from the JSON data file."""
         if os.path.exists(self.data_file):
             try:
                 with open(self.data_file, 'r', encoding='utf-8') as f:
