@@ -84,6 +84,7 @@ class NutritionalAnalyzer:
         return summary
 
     def get_weekly_history(self) -> Dict[str, Dict[str, float]]:
+        """Returns the daily summaries for the past 7 days for trend analysis."""
         import datetime
         history = {}
         today = datetime.date.today()
