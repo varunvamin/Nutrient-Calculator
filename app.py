@@ -89,12 +89,12 @@ with tabs[0]:
         values = [summary['protein'], summary['carbs'], summary['fat']]
         if sum(values) > 0:
             fig = go.Figure(data=[go.Pie(labels=['Protein', 'Carbs', 'Fat'], values=values, hole=.6, 
-                                         marker_colors=['#93c5fd', '#fdba74', '#f9a8d4'])])
+                                         marker_colors=['#1B4332', '#F4A261', '#B9B4A9'])])
             fig.update_layout(
                 margin=dict(t=0, b=0, l=0, r=0), 
                 paper_bgcolor='rgba(0,0,0,0)', 
                 plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#1a1a1a', family='Inter')
+                font=dict(color='#2B2B2B', family='Inter')
             )
             st.plotly_chart(fig, use_container_width=True, theme=None)
             
@@ -118,12 +118,12 @@ with tabs[1]:
     cals = [d['calories'] for d in history.values()]
     
     fig_bar = px.bar(x=dates, y=cals, labels={'x':'Date', 'y':'Calories'}, title="Calorie Intake (Last 7 Days)")
-    fig_bar.update_traces(marker_color='#fdba74')
+    fig_bar.update_traces(marker_color='#2D6A4F')
     fig_bar.update_layout(
         paper_bgcolor='rgba(0,0,0,0)', 
         plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(color='#1a1a1a', family='Inter'),
-        xaxis=dict(showgrid=False, color='#1a1a1a'),
-        yaxis=dict(showgrid=True, gridcolor='#e0e0e0', color='#1a1a1a')
+        font=dict(color='#2B2B2B', family='Inter'),
+        xaxis=dict(showgrid=False, color='#2B2B2B'),
+        yaxis=dict(showgrid=True, gridcolor='#EAEAEA', color='#2B2B2B')
     )
     st.plotly_chart(fig_bar, use_container_width=True, theme=None)

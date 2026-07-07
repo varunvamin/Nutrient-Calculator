@@ -1,68 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color-primary: #1B4332;
+  --color-primary-light: #2D6A4F;
+  --color-accent: #F4A261;
+  --color-accent-dark: #E08A3E;
+  --color-bg: #FDFBF7;
+  --color-white: #FFFFFF;
+  --color-text: #2B2B2B;
+  --color-grey: #EAEAEA;
+  --color-grey-mid: #B9B4A9;
+  --shadow-soft: 0 8px 24px rgba(27, 67, 50, 0.08);
+  --shadow-lift: 0 16px 40px rgba(27, 67, 50, 0.14);
+}
 
 html, body, [class*="css"] { 
     font-family: 'Inter', sans-serif; 
 }
 
-/* Main App Background (Light Gray/Off-White) */
+/* Main App Background */
 .stApp { 
-    background-color: #e5e5e5; 
-    color: #1a1a1a; 
+    background-color: var(--color-bg); 
+    color: var(--color-text); 
 }
 
 /* Typography Colors */
-h1, h2, h3, h4, h5, h6, p, label { 
-    color: #1a1a1a !important; 
-    font-weight: 600; 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif !important;
+    color: var(--color-primary) !important;
+    font-weight: 600;
 }
 
-/* Sidebar styling (Dark floating panel look) */
+p, label { 
+    color: var(--color-text) !important; 
+    font-weight: 500; 
+}
+
+/* Sidebar styling */
 [data-testid="stSidebar"] { 
-    background: linear-gradient(180deg, #4a4a4a 0%, #1e1e1e 100%) !important; 
-    border-right: none; 
-    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+    background-color: var(--color-white) !important; 
+    border-right: 1px solid var(--color-grey); 
+    box-shadow: 4px 0 20px rgba(0,0,0,0.03);
 }
 
-/* Force all text in sidebar to be white/light gray */
 [data-testid="stSidebar"] h1, 
 [data-testid="stSidebar"] h2, 
 [data-testid="stSidebar"] h3, 
 [data-testid="stSidebar"] p, 
 [data-testid="stSidebar"] label, 
 [data-testid="stSidebar"] div {
-    color: #f0f0f0 !important;
+    color: var(--color-primary) !important;
 }
 
-/* Sidebar Progress Bars (Coral Accent) */
+/* Sidebar Progress Bars */
 [data-testid="stSidebar"] .stProgress > div > div > div > div {
-    background-color: #ff6b4a !important; 
+    background-color: var(--color-primary-light) !important; 
 }
 
-/* Inputs (Search, number inputs) - Neumorphic pill shape */
+/* Inputs (Search, number inputs) */
 [data-baseweb="input"], [data-baseweb="base-input"],
 .stTextInput>div>div>input, .stNumberInput>div>div>input { 
-    background-color: #f5f5f5 !important; 
-    color: #1a1a1a !important; 
-    -webkit-text-fill-color: #1a1a1a !important;
-    border: none !important; 
-    border-radius: 30px !important;
-    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -3px -3px 6px rgba(255,255,255,0.5) !important;
+    background-color: var(--color-white) !important; 
+    color: var(--color-text) !important; 
+    -webkit-text-fill-color: var(--color-text) !important;
+    border: 1px solid var(--color-grey) !important; 
+    border-radius: 16px !important;
+    box-shadow: none !important;
 }
 
 [data-testid="stNumberInputStepDown"], 
 [data-testid="stNumberInputStepUp"] {
-    background-color: #f5f5f5 !important;
-    color: #1a1a1a !important;
+    background-color: var(--color-white) !important;
+    color: var(--color-text) !important;
     border: none !important;
 }
 
 [data-testid="stNumberInputStepDown"] svg, 
 [data-testid="stNumberInputStepUp"] svg {
-    fill: #1a1a1a !important;
+    fill: var(--color-text) !important;
 }
 
 ::placeholder {
-    color: #888888 !important;
+    color: var(--color-grey-mid) !important;
     opacity: 1;
 }
 
@@ -70,71 +89,73 @@ h1, h2, h3, h4, h5, h6, p, label {
     padding: 2px 10px;
 }
 
-/* Buttons (Coral/Orange accent matching image) */
+/* Buttons */
 .stButton > button, 
 [data-testid="stFormSubmitButton"] > button,
 [data-testid="baseButton-secondary"] { 
-    background-color: #ff6b4a !important; 
-    color: #ffffff !important; 
+    background-color: var(--color-primary) !important; 
+    color: var(--color-white) !important; 
     border: none !important; 
-    border-radius: 30px !important; 
-    padding: 12px 24px !important; 
+    border-radius: 999px !important; 
+    padding: 13px 26px !important; 
+    font-family: 'Poppins', sans-serif !important;
     font-weight: 600 !important; 
     width: 100% !important; 
-    box-shadow: 0 4px 12px rgba(255, 107, 74, 0.3) !important;
-    transition: all 0.2s ease-in-out !important;
+    box-shadow: var(--shadow-soft) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
 }
 
 .stButton > button p, .stButton > button div, .stButton > button span,
 [data-testid="stFormSubmitButton"] > button p, [data-testid="stFormSubmitButton"] > button div, [data-testid="stFormSubmitButton"] > button span {
-    color: #ffffff !important;
+    color: var(--color-white) !important;
 }
 
-.stButton>button:hover { 
+.stButton>button:hover, [data-testid="stFormSubmitButton"] > button:hover { 
     transform: translateY(-2px); 
-    box-shadow: 0 6px 15px rgba(255, 107, 74, 0.5); 
-    color: #ffffff !important;
-    border: none;
+    box-shadow: var(--shadow-lift) !important; 
+    background-color: var(--color-primary-light) !important;
 }
 
-/* Delete Button Specific - Make it a bit more subtle */
+/* Delete Button Specific */
 button[key^="del_"] {
-    background-color: #f5f5f5;
-    color: #ff6b4a !important;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    background-color: var(--color-white) !important;
+    color: var(--color-error) !important;
+    border: 1px solid var(--color-error) !important;
+    box-shadow: none !important;
 }
 
-/* Expanders and Forms (White rounded cards) */
+/* Expanders and Forms */
 .streamlit-expanderHeader { 
-    background-color: #ffffff; 
-    border-radius: 20px; 
-    border: none; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    background-color: var(--color-white); 
+    border-radius: 16px; 
+    border: 1px solid var(--color-grey); 
+    box-shadow: none;
 }
 
 div[data-testid="stExpanderDetails"] { 
-    background-color: #ffffff; 
-    border-radius: 0 0 20px 20px; 
-    border: none; 
+    background-color: var(--color-bg); 
+    border-radius: 0 0 16px 16px; 
+    border: 1px solid var(--color-grey); 
+    border-top: none;
 }
 
 [data-testid="stForm"] { 
-    background-color: #ffffff; 
-    border: none; 
+    background-color: var(--color-white); 
+    border: 1px solid var(--color-grey); 
     border-radius: 24px; 
     padding: 24px; 
-    box-shadow: 5px 5px 20px rgba(0,0,0,0.03);
+    box-shadow: var(--shadow-soft);
 }
 
 /* Tabs styling */
 [data-baseweb="tab-list"] {
-    background-color: #ffffff;
-    border-radius: 30px;
+    background-color: var(--color-white);
+    border-radius: 24px;
     padding: 5px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.03);
+    box-shadow: var(--shadow-soft);
 }
 
 [data-baseweb="tab"] {
-    border-radius: 25px;
+    border-radius: 16px;
     padding: 10px 20px;
 }
