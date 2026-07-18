@@ -5,6 +5,13 @@ import requests
 from nutrients import NutritionalAnalyzer
 import datetime
 
+@st.cache_data(ttl=3600)
+def fetch_food_data(query):
+    url = f"https://world.openfoodfacts.org/cgi/search.pl?search_terms={query}&search_simple=1&action=process&json=1&page_size=1"
+    response = requests.get(url, headers={'User-Agent': 'NutrientCalculator/1.0'}, timeout=10)
+    response.raise_for_status()
+    return response.json()
+
 st.set_page_config(page_title="Health Buddy", page_icon="☁️", layout="wide")
 
 def load_css():
@@ -58,8 +65,9 @@ with tabs[0]:
             search_query = st.text_input("Ask anything... (e.g., Apple)")
             if st.form_submit_button("Fetch Macros ✨") and search_query.strip():
                 try:
-                    url = f"https://world.openfoodfacts.org/cgi/search.pl?search_terms={search_query}&search_simple=1&action=process&json=1&page_size=1"
-                    data = requests.get(url, headers={'User-Agent': 'NutrientCalculator/1.0'}).json()
+                    with st.spinner("Fetching nutritional data ✨..."):
+                        data = fetch_food_data(search_query)
+                        
                     if data.get('products'):
                         p = data['products'][0]
                         n = p.get('nutriments', {})
@@ -68,9 +76,11 @@ with tabs[0]:
                                           float(n.get('carbohydrates_100g', 0)), float(n.get('fat_100g', 0)))
                         st.rerun()
                     else:
-                        st.warning("Not found.")
+                        st.warning("Food not found. Try a different search term.")
+                except requests.exceptions.RequestException:
+                    st.error("Network error: Unable to reach the food database. Please try again later.")
                 except Exception:
-                    st.error("API Error.")
+                    st.error("An unexpected error occurred while processing the data.")
 
         st.subheader("🍽️ Manual Entry")
         with st.form("manual_entry"):
